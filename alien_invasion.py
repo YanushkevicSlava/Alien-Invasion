@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class AlienInvasion:
@@ -18,6 +19,15 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
+
+    def _create_fleet(self):
+        """ создание флота вторжения."""
+        # создание пришельца.
+        alien = Alien(self)
+        self.aliens.add(alien)
 
     def run_game(self):
         """ Запуск основного цикла """
@@ -55,7 +65,7 @@ class AlienInvasion:
             self.ship.moving_left = False
 
     def _fire_bullet(self):
-        """ Создание новогоснаряда и включение его в группу bullets. """
+        """ Создание нового снаряда и включение его в группу bullets. """
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
@@ -75,6 +85,7 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
         # Отображение последнего прорисованого экрана
         pygame.display.flip()
 
