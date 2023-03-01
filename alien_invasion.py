@@ -8,7 +8,6 @@ from bullet import Bullet
 from alien import Alien
 
 
-
 class AlienInvasion:
     """ Класс для управления ресурсами и поведением игры. """
 
@@ -19,6 +18,9 @@ class AlienInvasion:
 
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption('Alien Invasion')
+
+        # Создание экземпляра для хранения игровой статистики.
+        self.stats = GameStats(self)
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -117,7 +119,23 @@ class AlienInvasion:
         self.aliens.update()
         #проверка коллизий "пришелец- корабль".
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
+
+    def _ship_hit(self):
+        """Обрабатывает столкновение корабля с пришельцем."""
+        # Уменьшение ship_left.
+        self.stats.ships_left -= 1
+
+        # Очистка списков пришельцев от снарядов.
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # Создание нового флота и размещение корабля в центре.
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Пауза.
+        sleep(0.5)
 
     def _update_bullets(self):
         """ Обновляет позиции снарядов и уничтожает старые снаряды. """
