@@ -132,7 +132,7 @@ class AlienInvasion:
         обновляет позиции всех пришельцев во флоте."""
         self._check_fleet_edges()
         self.aliens.update()
-        #проверка коллизий "пришелец- корабль".
+        # проверка коллизий "пришелец- корабль".
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
         # Проверить, добрались ли пришельцы до нижнего края экрана.
