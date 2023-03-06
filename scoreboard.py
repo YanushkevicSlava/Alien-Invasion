@@ -8,6 +8,7 @@ class Scoreboard:
         """Инициализирует атрибуты подсчёта очков."""
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
+        self.settings = ai_game.stats
         self.stats = ai_game.stats
 
         # Настройки шрифта для вывода счёта.
@@ -20,7 +21,7 @@ class Scoreboard:
         """Преобразует текущий счёт в изображение."""
         score_str = str(self.stats.score)
         self.score_image = self.font.render(score_str, True,
-                                            self.text_color, self.settings.bg_color)
+                                            self.text_color, (230, 230, 230))
 
         # Вывод счёта в правой верхней части экрана.
         self.score_rect = self.score_image.get_rect()

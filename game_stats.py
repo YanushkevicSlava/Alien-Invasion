@@ -1,4 +1,4 @@
-class GameStats():
+class GameStats:
     """Отслеживание статистики для игры Alien Invasion."""
 
     def __init__(self, ai_game):
