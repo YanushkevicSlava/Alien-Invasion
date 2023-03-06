@@ -23,9 +23,9 @@ class Settings:
         # Темп ускорения игры.
         self.speedup_scale = 1.1
 
-        self.initialize_dynamic_setting()
+        self.initialize_dynamic_settings()
 
-    def initialize_dynamic_setting(self):
+    def initialize_dynamic_settings(self):
         """Инициализирует настройки, изменяющиеся в ходе игры."""
         self.ship_speed_factor = 1.5
         self.bullet_speed_factor = 3.0
