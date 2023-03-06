@@ -115,6 +115,9 @@ class AlienInvasion:
             self._create_fleet()
             self.ship.center_ship()
 
+            # Указатель мыши скрывается.
+            pygame.mouse.set_visible(False)
+
     def _check_keydown_events(self, event):
         """ Реагирует нп нажатие клавиши """
         if event.key == pygame.K_RIGHT:
@@ -167,6 +170,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _update_bullets(self):
         """ Обновляет позиции снарядов и уничтожает старые снаряды. """
@@ -190,6 +194,7 @@ class AlienInvasion:
             # Уничтожение существующих снарядов и создание нового флота.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
