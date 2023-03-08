@@ -74,7 +74,7 @@ class AlienInvasion:
         """Опускает весь флот и меняет направление."""
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.fleet_drop_speed
-            self.settings.fleet_direction *= -1
+        self.settings.fleet_direction *= -1
 
     def run_game(self):
         """ Запуск основного цикла """
