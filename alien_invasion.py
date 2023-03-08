@@ -190,7 +190,7 @@ class AlienInvasion:
         self._check_bullet_alien_collisions()
 
     def _check_bullet_alien_collisions(self):
-        """Оьработка коллизий снарядов с пришельцами."""
+        """Обработка коллизий снарядов с пришельцами."""
         # print(len(self.bullets))
         # Проверка попаданий в пришельцев
         # При обнаружении удалить снаряд и пришельца.
@@ -200,6 +200,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
         if not self.aliens:
             # Уничтожение существующих снарядов и создание нового флота.
             self.bullets.empty()
@@ -230,6 +231,8 @@ class AlienInvasion:
                 # Происходит тоже самое, что при столкновении с кораблём.
                 self._ship_hit()
                 break
+
+
 
 
 if __name__ == '__main__':
