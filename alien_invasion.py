@@ -112,6 +112,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
 
             # Очистка списков пришельцев и снарядов.
             self.aliens.empty()
@@ -125,7 +126,7 @@ class AlienInvasion:
             pygame.mouse.set_visible(False)
 
     def _check_keydown_events(self, event):
-        """ Реагирует нп нажатие клавиши """
+        """ Реагирует на нажатие клавиши """
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
@@ -206,6 +207,9 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+            # Увеличение уровня.
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
@@ -214,7 +218,6 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
-
 
         # Кнопка Play отображается в том случае, если игра неактивна.
         if not self.stats.game_active:
@@ -231,8 +234,6 @@ class AlienInvasion:
                 # Происходит тоже самое, что при столкновении с кораблём.
                 self._ship_hit()
                 break
-
-
 
 
 if __name__ == '__main__':
